@@ -27,11 +27,12 @@ if __name__ == "__main__":
         app = make_app()
         app.listen(port)
         print("connect to http://" + host_ip + ":" + str(port))
+        print("use COMMAND + C to exit")
         tornado.ioloop.IOLoop.current().start()
     # signal : CTRL + BREAK on windows or CTRL + C on linux
     except KeyboardInterrupt:
         print()
-        print("stoppping loop and closed port")
+        print("stopping loop and closed port")
         tornado.ioloop.IOLoop.current().stop()
         
     
