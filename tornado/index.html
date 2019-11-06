@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   <title>ATC</title>
@@ -7,6 +6,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 
 <style>
     .center {
@@ -54,7 +54,7 @@
           <div class="col-1 col-sm-1"></div>
               
           <div class="col-1 col-sm-1">
-              <button class="card"> Forward </button>
+            <button class="card" name = 'forward'> Forward </button>
           </div>
         </div>
         
@@ -62,8 +62,8 @@
           <div class="col-1 col-sm-1 col-xl-1">
               </div>
           <div class="col-2 col-sm-4">
-              <button class="card"> Left </button>
-              <button class="card"> Right </button>
+              <button class="card" id = "left"> Left </button>
+              <button class="card" id = "right"> Right </button>
           </div>
         </div>
         
@@ -85,21 +85,14 @@
     </div>
     
     <div class="row"> <!--Random buttons to show having elements next to the video.-->
-        
-        <div class="col-sm-8 col-md-6 col-lg-6 col-xl-6">
-            
-            <img src="stream.mjpg" width="480" height="400">
-        </div>
-	<div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+        <div class="col-1 col-sm-1 col-xl-1">
             </div>
-        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3"> <!--column-->
+        <div class="col-3 col-sm-3 col-xl-3"> <!--column-->
         <!--<button type="button" class="btn btn-outline-primary">Primary</button>-->
         <button class="card">Click Here for Virtual Joystick</button>
-        <button type="button" class="btn btn-outline-success">Success</button>
-        <button type="button" class="btn btn-outline-info">Info</button>
-        <button type="button" class="btn btn-outline-warning">Warning</button>
-        <button type="button" class="btn btn-outline-danger">Danger</button>
-        <button type="button" class="btn btn-outline-dark">Dark</button>
+        </div>
+            <div class="col-sm-4 col-xl-8">
+            
         </div>
     </div>
         
@@ -107,12 +100,29 @@
 
 </body>
 
+<script>
+  $("#left").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/explicit_action_url/",
+          data:{"dataString": dataString,"id":id},
+          success: function (data) {
+              alert("success")
+          }
+      });
+  });
+  $("#right").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/explicit_action_url/",
+          success: function (data) {
+              alert("success")
+          }
+      });
+  });
+
+
+</script>
+
 </html>
 
-<!--
-<div class="row">
-  <div class="col"></div>
-  <div class="col"></div>
-  <div class="col"></div>
-</div>
--->

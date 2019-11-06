@@ -6,15 +6,24 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html")
 
+
 class PhotoHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("photos.html")
 
+class ActionHandler(tornado.web.RequestHandler):
+    def get(self):
+        
+        print("left button click")
+
 def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
-        (r"/", PhotoHandler),
+        (r"/photos", PhotoHandler),
+        (r"/explicit_action_url/", ActionHandler),
     ])
+
+
 
 if __name__ == "__main__":
     try: 
@@ -26,7 +35,7 @@ if __name__ == "__main__":
         print("Unable to get Hostname and IP")
 
     try:
-        port = 8009
+        port = 8010
         app = make_app()
         app.listen(port)
         print("connect to http://" + host_ip + ":" + str(port))
