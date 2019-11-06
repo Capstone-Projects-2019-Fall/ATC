@@ -4,13 +4,16 @@ import socket
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.write("Hello, world")
-        items = ["Item 1", "Item 2", "Item 3"]
-        self.render("index.html", title="My title", items=items)
+        self.render("index.html")
+
+class PhotoHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render("photos.html")
 
 def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
+        (r"/", PhotoHandler),
     ])
 
 if __name__ == "__main__":
@@ -27,7 +30,7 @@ if __name__ == "__main__":
         app = make_app()
         app.listen(port)
         print("connect to http://" + host_ip + ":" + str(port))
-        print("use COMMAND + C to exit")
+        print("use CTRL + C to exit")
         tornado.ioloop.IOLoop.current().start()
     # signal : CTRL + BREAK on windows or CTRL + C on linux
     except KeyboardInterrupt:
