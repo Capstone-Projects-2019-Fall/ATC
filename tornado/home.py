@@ -2,7 +2,7 @@ import tornado.ioloop
 import tornado.web
 import socket 
 import io
-#import picamera
+import picamera
 import logging
 import socketserver
 from threading import Condition
@@ -110,7 +110,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True
     daemon_threads = True
-"""
+
 with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
     output = StreamingOutput()
     #Uncomment the next line to change your Pi's Camera rotation (in degrees)
@@ -122,7 +122,7 @@ with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
         server.serve_forever()
     finally:
         camera.stop_recording()
-"""
+
 
 if __name__ == "__main__":
     try: 
