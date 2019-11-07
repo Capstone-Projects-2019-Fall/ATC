@@ -11,16 +11,32 @@ class PhotoHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("photos.html")
 
-class ActionHandler(tornado.web.RequestHandler):
+class LeftActionHandler(tornado.web.RequestHandler):
     def get(self):
+        print("Left button click")
         
-        print("left button click")
+class RightActionHandler(tornado.web.RequestHandler):
+    def get(self):
+        print("Right button click")
+
+
+class ForwardActionHandler(tornado.web.RequestHandler):
+    def get(self):
+        print("Up button click")
+
+class BackwardActionHandler(tornado.web.RequestHandler):
+    def get(self):
+        print("Down button click")
 
 def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
-        (r"/photos", PhotoHandler),
-        (r"/explicit_action_url/", ActionHandler),
+        (r"/photos/", PhotoHandler),
+        (r"/moveleft/", LeftActionHandler),
+        (r"/moveright/", RightActionHandler),
+        (r"/moveforward/", ForwardActionHandler),
+        (r"/movebackward/", BackwardActionHandler),
+
     ])
 
 

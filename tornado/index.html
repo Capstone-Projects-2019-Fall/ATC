@@ -27,8 +27,7 @@
   <div class="container-fluid">
     <ul class="nav navbar-nav">
       <li><a href="index.html">Home</a></li>
-      <!--below is a placeholder index.html, that should be replaced-->
-      <li><a href="index.html">Your Photos and Videos</a></li>
+      <li><a href="photos.html" id = 'photos'>Your Photos and Videos</a></li>
     </ul>
   </div>
 </nav>
@@ -56,7 +55,7 @@
 		<div class="row">
 		<div class="col-xs-4 col-sm-4 col-md-1"></div>
 		<div class="col-xs-1 col-sm-1 col-md-1 center_2"></div>
-			<button type="button" class="btn">Forward</button>
+			<button type="button" class="btn" id = 'forward'>Forward</button>
 
 		<div class="row">
 		<div class="col-xs-4 col-sm-4 col-md-1"></div>
@@ -68,7 +67,7 @@
 		<div class="row">
 		<div class="col-xs-4 col-sm-4 col-md-4 "></div>
 		<div class="col-xs-1 col-sm-1 col-md-4 "></div>
-		<button type="button" class="btn btn-outline-warning">Backward</button>
+		<button type="button" class="btn btn-outline-warning" id = 'backward'>Backward</button>
 		</div>
 		</div>
     </div>
@@ -79,19 +78,45 @@
   $("#left").click(function () {
       $.ajax({
           type: 'GET',
-          url: "/explicit_action_url/",
-          data:{"dataString": dataString,"id":id},
+          url: "/moveleft/",
           success: function (data) {
-              alert("success")
+              alert("Moved left successfully")
           }
       });
   });
   $("#right").click(function () {
       $.ajax({
           type: 'GET',
-          url: "/explicit_action_url/",
+          url: "/moveright/",
           success: function (data) {
-              alert("success")
+              alert("Moved right successfully")
+          }
+      });
+  });
+
+  $("#forward").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/moveforward/",
+          success: function (data) {
+              alert("Moved forward successfully")
+          }
+      });
+  });
+  $("#backward").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/movebackward/",
+          success: function (data) {
+              alert("Moved backwards successfully")
+          }
+      });
+  });
+  $("#photos").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/photos/",
+          success: function (data) {
           }
       });
   });
