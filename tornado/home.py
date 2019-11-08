@@ -95,7 +95,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
                         frame = output.frame
                     self.wfile.write(b'--FRAME\r\n')
                     self.send_header('Content-Type', 'image/jpeg')
-                    self.send_header('Content-Length', len(frame))
+                    self.send_header('Content-Length' , len(frame))
                     self.end_headers()
                     self.wfile.write(frame)
                     self.wfile.write(b'\r\n')
@@ -110,8 +110,6 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True
     daemon_threads = True
-
-
 
 
 if __name__ == "__main__":
@@ -129,25 +127,21 @@ if __name__ == "__main__":
         camera.rotation = 180
         camera.start_recording(output, format='mjpeg')
     try:
-        address = ('', 8000)
+        port = 8000
+        address = ('', port)
         server = StreamingServer(address, StreamingHandler)
         server.serve_forever()
-    finally:
-        camera.stop_recording()
-
-    try:
-        port = 8000
         app = make_app()
         app.listen(port)
         print("connect to http://" + host_ip + ":" + str(port))
         print("use CTRL + C to exit")
         tornado.ioloop.IOLoop.current().start()
-    # signal : CTRL + BREAK on windows or CTRL + C on linux
     except KeyboardInterrupt:
         print()
         print("stopping loop and closed port")
         tornado.ioloop.IOLoop.current().stop()
-    
+    finally:
+        camera.stop_recording()
     
         
     
