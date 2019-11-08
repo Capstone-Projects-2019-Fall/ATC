@@ -2,7 +2,7 @@ import tornado.ioloop
 import tornado.web
 import socket 
 import io
-import picamera
+#import picamera
 import logging
 import socketserver
 from threading import Condition
@@ -120,17 +120,16 @@ if __name__ == "__main__":
         print("IP : ",host_ip) 
     except: 
         print("Unable to get Hostname and IP")
-
-    with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
-        output = StreamingOutput()
-    #Uncomment the next line to change your Pi's Camera rotation (in degrees)
-        camera.rotation = 180
-        camera.start_recording(output, format='mjpeg')
+    # with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
+    #     output = StreamingOutput()
+    # #Uncomment the next line to change your Pi's Camera rotation (in degrees)
+    #     camera.rotation = 180
+    #     camera.start_recording(output, format='mjpeg')
     try:
         port = 8000
         address = ('', port)
-        server = StreamingServer(address, StreamingHandler)
-        server.serve_forever()
+        # server = StreamingServer(address, StreamingHandler)
+        # server.serve_forever()
         app = make_app()
         app.listen(port)
         print("connect to http://" + host_ip + ":" + str(port))
@@ -140,8 +139,8 @@ if __name__ == "__main__":
         print()
         print("stopping loop and closed port")
         tornado.ioloop.IOLoop.current().stop()
-    finally:
-        camera.stop_recording()
+    # finally:
+    #     camera.stop_recording()
     
         
     
