@@ -126,7 +126,7 @@ if __name__ == "__main__":
     #     camera.rotation = 180
     #     camera.start_recording(output, format='mjpeg')
     try:
-        port = 8000
+        port = 8008
         address = ('', port)
         # server = StreamingServer(address, StreamingHandler)
         # server.serve_forever()
