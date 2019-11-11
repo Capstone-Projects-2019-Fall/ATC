@@ -24,19 +24,19 @@ ER = 11
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        render("index.html")
+        self.render("index.html")
 
 
 class PhotoHandler(tornado.web.RequestHandler):
     def get(self):
-        render("photos.html")
+        self.render("photos.html")
 
-class LeftActionHandler(tornado.web.RequestHandler)
+class LeftActionHandler(tornado.web.RequestHandler):
     def get(self):
         try:
             connection = SerialManager()
             a = ArduinoApi(connection = connection)
-            print("connected to the Arduino!")
+            print("connected!")
         except:
             print("Failed to connect to Arduino")
         a.pinMode(ER, a.OUTPUT)
