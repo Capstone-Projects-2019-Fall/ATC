@@ -7,7 +7,20 @@ import logging
 import socketserver
 from threading import Condition
 from http import server
+from nanpy import (ArduinoApi, SerialManager)
+from time import sleep
 
+# Arduino Pins
+# MR = Motor Right
+# ML = Motor Left
+# EL = Enable Left
+ML1 = 5
+ML2 = 4
+MR1 = 13
+MR2 = 12
+
+EL = 3
+ER = 11
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -19,13 +32,39 @@ class PhotoHandler(tornado.web.RequestHandler):
         self.render("photos.html")
 
 class LeftActionHandler(tornado.web.RequestHandler):
+    def __init__(self):
+        try:
+            self.connection = SerialManager()
+            self.a = ArduinoApi(connection = self.connection)
+            print("connected!")
+        except:
+            print("Failed to connect to Arduino")
     def get(self):
+        self.a.pinMode(ER, self.a.OUTPUT)
+        self.a.pinMode(EL, self.a.OUTPUT)
+        self.a.pinMode(ML1, self.a.OUTPUT)
+        self.a.pinMode(ML2, self.a.OUTPUT)
+        self.a.pinMode(MR1, self.a.OUTPUT)
+        self.a.pinMode(MR2, self.a.OUTPUT)
         print("Left button click")
+        try:
+            while True:
+                self.a.digitalWrite(ML1, self.a.HIGH)
+                self.a.digitalWrite(ML2, self.a.LOW)
+                self.a.digitalWrite(MR1, self.a.HIGH)
+                self.a.digitalWrite(MR2, self.a.LOW)
+                self.a.analogWrite(EL, 80)
+                self.a.analogWrite(ER, 255)
+        except:
+            self.a.digitalWrite(ML1, self.a.LOW)    # cut off voltage to these pins if something went wrong
+            self.a.digitalWrite(MR1, self.a.LOW)    # cut off voltage to these pins if something went wrong
+
      
    
 class RightActionHandler(tornado.web.RequestHandler):
     def get(self):
         print("Right button click")
+
 
 
 class ForwardActionHandler(tornado.web.RequestHandler):
