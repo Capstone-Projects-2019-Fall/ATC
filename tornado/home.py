@@ -64,18 +64,93 @@ class LeftActionHandler(tornado.web.RequestHandler):
    
 class RightActionHandler(tornado.web.RequestHandler):
     def get(self):
+        try:
+            connection = SerialManager()
+            a = ArduinoApi(connection = connection)
+            print("connected!")
+        except:
+            print("Failed to connect to Arduino")
+        a.pinMode(ER, a.OUTPUT)
+        a.pinMode(EL, a.OUTPUT)
+        a.pinMode(ML1, a.OUTPUT)
+        a.pinMode(ML2, a.OUTPUT)
+        a.pinMode(MR1, a.OUTPUT)
+        a.pinMode(MR2, a.OUTPUT)
         print("Right button click")
+        try:
+            while state:
+                a.digitalWrite(ML1, a.HIGH)
+                a.digitalWrite(ML2, a.LOW)
+                a.digitalWrite(MR1, a.HIGH)
+                a.digitalWrite(MR2, a.LOW)
+                a.analogWrite(EL, 255)
+                a.analogWrite(ER, 80)
+                state = False
+        except:
+            a.digitalWrite(ML1, a.LOW)    # cut off voltage to these pins if something went wrong
+            a.digitalWrite(MR1, a.LOW)    # cut off voltage to these pins if something went wrong
+
 
 
 
 class ForwardActionHandler(tornado.web.RequestHandler):
     def get(self):
-        print("Up button click")
+        try:
+            connection = SerialManager()
+            a = ArduinoApi(connection = connection)
+            print("connected!")
+        except:
+            print("Failed to connect to Arduino")
+        a.pinMode(ER, a.OUTPUT)
+        a.pinMode(EL, a.OUTPUT)
+        a.pinMode(ML1, a.OUTPUT)
+        a.pinMode(ML2, a.OUTPUT)
+        a.pinMode(MR1, a.OUTPUT)
+        a.pinMode(MR2, a.OUTPUT)
+        print("Forward button click")
+        try:
+            while state:
+                a.digitalWrite(ML1, a.HIGH)
+                a.digitalWrite(ML2, a.LOW)
+                a.digitalWrite(MR1, a.HIGH)
+                a.digitalWrite(MR2, a.LOW)
+                a.analogWrite(EL, 255)
+                a.analogWrite(ER, 255)
+                state = False
+        except:
+            a.digitalWrite(ML1, a.LOW)    # cut off voltage to these pins if something went wrong
+            a.digitalWrite(MR1, a.LOW)    # cut off voltage to these pins if something went wrong
+
 
 
 class BackwardActionHandler(tornado.web.RequestHandler):
     def get(self):
+        try:
+            connection = SerialManager()
+            a = ArduinoApi(connection = connection)
+            print("connected!")
+        except:
+            print("Failed to connect to Arduino")
+        a.pinMode(ER, a.OUTPUT)
+        a.pinMode(EL, a.OUTPUT)
+        a.pinMode(ML1, a.OUTPUT)
+        a.pinMode(ML2, a.OUTPUT)
+        a.pinMode(MR1, a.OUTPUT)
+        a.pinMode(MR2, a.OUTPUT)
         print("Down button click")
+        try:
+            while state:
+                a.digitalWrite(ML1, a.LOW)
+                a.digitalWrite(ML2, a.HIGH)
+                a.digitalWrite(MR1, a.LOW)
+                a.digitalWrite(MR2, a.HIGH)
+                a.analogWrite(EL, 255)
+                a.analogWrite(ER, 255)
+                state = False
+        except:
+            a.digitalWrite(ML1, a.LOW)    # cut off voltage to these pins if something went wrong
+            a.digitalWrite(MR1, a.LOW)    # cut off voltage to these pins if something went wrong
+
 
 
 def make_app():
