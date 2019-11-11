@@ -24,40 +24,39 @@ ER = 11
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("index.html")
+        render("index.html")
 
 
 class PhotoHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("photos.html")
+        render("photos.html")
 
-class LeftActionHandler(tornado.web.RequestHandler):
-    def __init__(self):
+class LeftActionHandler(tornado.web.RequestHandler)
+    def get(self):
         try:
-            self.connection = SerialManager()
-            self.a = ArduinoApi(connection = self.connection)
-            print("connected!")
+            connection = SerialManager()
+            a = ArduinoApi(connection = connection)
+            print("connected to the Arduino!")
         except:
             print("Failed to connect to Arduino")
-    def get(self):
-        self.a.pinMode(ER, self.a.OUTPUT)
-        self.a.pinMode(EL, self.a.OUTPUT)
-        self.a.pinMode(ML1, self.a.OUTPUT)
-        self.a.pinMode(ML2, self.a.OUTPUT)
-        self.a.pinMode(MR1, self.a.OUTPUT)
-        self.a.pinMode(MR2, self.a.OUTPUT)
+        a.pinMode(ER, a.OUTPUT)
+        a.pinMode(EL, a.OUTPUT)
+        a.pinMode(ML1, a.OUTPUT)
+        a.pinMode(ML2, a.OUTPUT)
+        a.pinMode(MR1, a.OUTPUT)
+        a.pinMode(MR2, a.OUTPUT)
         print("Left button click")
         try:
             while True:
-                self.a.digitalWrite(ML1, self.a.HIGH)
-                self.a.digitalWrite(ML2, self.a.LOW)
-                self.a.digitalWrite(MR1, self.a.HIGH)
-                self.a.digitalWrite(MR2, self.a.LOW)
-                self.a.analogWrite(EL, 80)
-                self.a.analogWrite(ER, 255)
+                a.digitalWrite(ML1, a.HIGH)
+                a.digitalWrite(ML2, a.LOW)
+                a.digitalWrite(MR1, a.HIGH)
+                a.digitalWrite(MR2, a.LOW)
+                a.analogWrite(EL, 80)
+                a.analogWrite(ER, 255)
         except:
-            self.a.digitalWrite(ML1, self.a.LOW)    # cut off voltage to these pins if something went wrong
-            self.a.digitalWrite(MR1, self.a.LOW)    # cut off voltage to these pins if something went wrong
+            a.digitalWrite(ML1, a.LOW)    # cut off voltage to these pins if something went wrong
+            a.digitalWrite(MR1, a.LOW)    # cut off voltage to these pins if something went wrong
 
      
    
@@ -91,60 +90,60 @@ def make_app():
 
 class StreamingOutput(object):
     def __init__(self):
-        self.frame = None
-        self.buffer = io.BytesIO()
-        self.condition = Condition()
+        frame = None
+        buffer = io.BytesIO()
+        condition = Condition()
 
     def write(self, buf):
         if buf.startswith(b'\xff\xd8'):
             # New frame, copy the existing buffer's content and notify all
             # clients it's available
-            self.buffer.truncate()
-            with self.condition:
-                self.frame = self.buffer.getvalue()
-                self.condition.notify_all()
-            self.buffer.seek(0)
-        return self.buffer.write(buf)
+            buffer.truncate()
+            with condition:
+                frame = buffer.getvalue()
+                condition.notify_all()
+            buffer.seek(0)
+        return buffer.write(buf)
 
 
 class StreamingHandler(server.BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path == '/':
-            self.send_response(301)
-            self.send_header('Location', '/index.html')
-            self.end_headers()
-        elif self.path == '/index.html':
+        if path == '/':
+            send_response(301)
+            send_header('Location', '/index.html')
+            end_headers()
+        elif path == '/index.html':
             content = PAGE.encode('utf-8')
-            self.send_response(200)
-            self.send_header('Content-Type', 'text/html')
-            self.send_header('Content-Length', len(content))
-            self.end_headers()
-            self.wfile.write(content)
-        elif self.path == '/stream.mjpg':
-            self.send_response(200)
-            self.send_header('Age', 0)
-            self.send_header('Cache-Control', 'no-cache, private')
-            self.send_header('Pragma', 'no-cache')
-            self.send_header('Content-Type', 'multipart/x-mixed-replace; boundary=FRAME')
-            self.end_headers()
+            send_response(200)
+            send_header('Content-Type', 'text/html')
+            send_header('Content-Length', len(content))
+            end_headers()
+            wfile.write(content)
+        elif path == '/stream.mjpg':
+            send_response(200)
+            send_header('Age', 0)
+            send_header('Cache-Control', 'no-cache, private')
+            send_header('Pragma', 'no-cache')
+            send_header('Content-Type', 'multipart/x-mixed-replace; boundary=FRAME')
+            end_headers()
             try:
                 while True:
                     with output.condition:
                         output.condition.wait()
                         frame = output.frame
-                    self.wfile.write(b'--FRAME\r\n')
-                    self.send_header('Content-Type', 'image/jpeg')
-                    self.send_header('Content-Length' , len(frame))
-                    self.end_headers()
-                    self.wfile.write(frame)
-                    self.wfile.write(b'\r\n')
+                    wfile.write(b'--FRAME\r\n')
+                    send_header('Content-Type', 'image/jpeg')
+                    send_header('Content-Length' , len(frame))
+                    end_headers()
+                    wfile.write(frame)
+                    wfile.write(b'\r\n')
             except Exception as e:
                 logging.warning(
                     'Removed streaming client %s: %s',
-                    self.client_address, str(e))
+                    client_address, str(e))
         else:
-            self.send_error(404)
-            self.end_headers()
+            send_error(404)
+            end_headers()
 
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True
