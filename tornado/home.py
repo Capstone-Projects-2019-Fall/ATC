@@ -48,15 +48,15 @@ class LeftActionHandler(tornado.web.RequestHandler):
         a.pinMode(MR2, a.OUTPUT)
         print("Left button click")
         try:
-            while state:
+            while True:
                 a.digitalWrite(ML1, a.HIGH)
                 a.digitalWrite(ML2, a.LOW)
                 a.digitalWrite(MR1, a.HIGH)
                 a.digitalWrite(MR2, a.LOW)
-                a.analogWrite(EL, 80)
-                a.analogWrite(ER, 255)
+                a.analogWrite(EL, 255)
+                a.analogWrite(ER, 80)
                 state = False
-        except:
+        except KeyboardInterrupt:
             a.digitalWrite(ML1, a.LOW)    # cut off voltage to these pins if something went wrong
             a.digitalWrite(MR1, a.LOW)    # cut off voltage to these pins if something went wrong
 
@@ -78,15 +78,15 @@ class RightActionHandler(tornado.web.RequestHandler):
         a.pinMode(MR2, a.OUTPUT)
         print("Right button click")
         try:
-            while state:
+            while True:
                 a.digitalWrite(ML1, a.HIGH)
                 a.digitalWrite(ML2, a.LOW)
                 a.digitalWrite(MR1, a.HIGH)
                 a.digitalWrite(MR2, a.LOW)
-                a.analogWrite(EL, 255)
-                a.analogWrite(ER, 80)
+                a.analogWrite(EL, 80)
+                a.analogWrite(ER, 255)
                 state = False
-        except:
+        except KeyboardInterrupt:
             a.digitalWrite(ML1, a.LOW)    # cut off voltage to these pins if something went wrong
             a.digitalWrite(MR1, a.LOW)    # cut off voltage to these pins if something went wrong
 
@@ -109,7 +109,7 @@ class ForwardActionHandler(tornado.web.RequestHandler):
         a.pinMode(MR2, a.OUTPUT)
         print("Forward button click")
         try:
-            while state:
+            while True:
                 a.digitalWrite(ML1, a.HIGH)
                 a.digitalWrite(ML2, a.LOW)
                 a.digitalWrite(MR1, a.HIGH)
@@ -117,7 +117,7 @@ class ForwardActionHandler(tornado.web.RequestHandler):
                 a.analogWrite(EL, 255)
                 a.analogWrite(ER, 255)
                 state = False
-        except:
+        except KeyboardInterrupt:
             a.digitalWrite(ML1, a.LOW)    # cut off voltage to these pins if something went wrong
             a.digitalWrite(MR1, a.LOW)    # cut off voltage to these pins if something went wrong
 
@@ -139,7 +139,7 @@ class BackwardActionHandler(tornado.web.RequestHandler):
         a.pinMode(MR2, a.OUTPUT)
         print("Down button click")
         try:
-            while state:
+            while True:
                 a.digitalWrite(ML1, a.LOW)
                 a.digitalWrite(ML2, a.HIGH)
                 a.digitalWrite(MR1, a.LOW)
@@ -147,7 +147,7 @@ class BackwardActionHandler(tornado.web.RequestHandler):
                 a.analogWrite(EL, 255)
                 a.analogWrite(ER, 255)
                 state = False
-        except:
+        except KeyboardInterrupt:
             a.digitalWrite(ML1, a.LOW)    # cut off voltage to these pins if something went wrong
             a.digitalWrite(MR1, a.LOW)    # cut off voltage to these pins if something went wrong
 
