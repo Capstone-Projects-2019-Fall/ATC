@@ -21,6 +21,7 @@ MR2 = 12
 
 EL = 3
 ER = 11
+state = True
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -47,13 +48,14 @@ class LeftActionHandler(tornado.web.RequestHandler):
         a.pinMode(MR2, a.OUTPUT)
         print("Left button click")
         try:
-            while True:
+            while state:
                 a.digitalWrite(ML1, a.HIGH)
                 a.digitalWrite(ML2, a.LOW)
                 a.digitalWrite(MR1, a.HIGH)
                 a.digitalWrite(MR2, a.LOW)
                 a.analogWrite(EL, 80)
                 a.analogWrite(ER, 255)
+                state = False
         except:
             a.digitalWrite(ML1, a.LOW)    # cut off voltage to these pins if something went wrong
             a.digitalWrite(MR1, a.LOW)    # cut off voltage to these pins if something went wrong
