@@ -23,7 +23,10 @@ PAGE="""\
 <style>
     .center {
       margin-top: 100px;
-      margin-right:auto;
+      text-align: center;
+    }
+	
+    .center_2 {
       text-align: center;
     }
 </style>
@@ -36,17 +39,107 @@ PAGE="""\
   <div class="container-fluid">
     <ul class="nav navbar-nav">
       <li><a href="index.html">Home</a></li>
+      <li><a href="photos.html" id = 'photos'>Your Photos and Videos</a></li>
     </ul>
   </div>
 </nav>
 </body>
 
 <body>
-    <div class="center">
-    <center><h1>ATC Car View</h1></center>
-    <center><img src="stream.mjpg" width="640" height="480"></center>
+    <!--below makes sure ATC Car View is always center above video-->
+    <div class="row"> <!--row-->
+        <div class="col-xs-4 col-sm-4 col-md-4"></div> <!--column-->
+            <div class="col-4 col-sm-4 col-md-4  center"> <!--column-->
+                <h1>ATC Car View</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row"> <!--Random buttons to show having elements next to the video.-->
+        <div class="col-xs-1 col-sm-1"></div>
+        <div class="col-xs-1 col-sm-1 col-md-1 center_2"></div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" id = 'record'>Record</button>
+          <button type="button" class="btn btn-primary" id = 'pause'>Pause</button>
+          <button type="button" class="btn btn-primary" id = 'stop'>Stop</button>
+          <button type="button" class="btn btn-primary" id = 'camera'>Camera</button>
+        </div>
+        <div class="col-xs-1 col-sm-1 col-md-2 "></div>
+        <div class="col col-sm-4 col-md-4 center_2">
+            
+            <img src="stream.mjpg" width="380" height="280">
+        </div>
+    </div>
+	<div class="col-1 col-sm-1 col-md-1 "></div>
+        <div class="col-3 col-sm-3 col-md-3 "> <!--column-->
+
+		<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-1"></div>
+		<div class="col-xs-1 col-sm-1 col-md-1 center_2"></div>
+			<button type="button" class="btn" id = 'forward'>Forward</button>
+
+		<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-1"></div>
+		<div class="col-xs-2 col-sm-1 col-md-4 center_2">
+		<button type="button" class="btn btn-outline-success" id = "left">Left</button></div>
+		<div class="col-xs-2 col-sm-1 col-md-4 ">
+		<button type="button" class="btn btn-outline-success" id = "right">Right</button></div></div>
+		
+		<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-4 "></div>
+		<div class="col-xs-1 col-sm-1 col-md-4 "></div>
+		<button type="button" class="btn btn-outline-warning" id = 'backward'>Backward</button>
+		</div>
+		</div>
+    </div>
+        
 
 </body>
+<script>
+  $("#left").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/moveleft/",
+          success: function (data) {
+              alert("Moved left successfully")
+          }
+      });
+  });
+  $("#right").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/moveright/",
+          success: function (data) {
+              alert("Moved right successfully")
+          }
+      });
+  });
+  $("#forward").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/moveforward/",
+          success: function (data) {
+              alert("Moved forward successfully")
+          }
+      });
+  });
+  $("#backward").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/movebackward/",
+          success: function (data) {
+              alert("Moved backwards successfully")
+          }
+      });
+  });
+  $("#photos").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/photos/",
+          success: function (data) {
+          }
+      });
+  });
+</script>
 
 </html>
 """
