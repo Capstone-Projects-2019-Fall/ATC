@@ -151,6 +151,9 @@ class BackwardActionHandler(tornado.web.RequestHandler):
             a.digitalWrite(ML1, a.LOW)    # cut off voltage to these pins if something went wrong
             a.digitalWrite(MR1, a.LOW)    # cut off voltage to these pins if something went wrong
 
+class PictureActionHandler(tornado.web.RequestHandler):
+    
+
 
 
 def make_app():
@@ -161,6 +164,8 @@ def make_app():
         (r"/moveright/", RightActionHandler),
         (r"/moveforward/", ForwardActionHandler),
         (r"/movebackward/", BackwardActionHandler),
+        (r"/takepicture/", PictureActionHandler),
+
 
     ])
 
