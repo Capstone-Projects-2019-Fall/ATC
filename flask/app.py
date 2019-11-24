@@ -35,6 +35,22 @@ def video_feed():
     return Response(gen(Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+@app.route('/moveleft')
+def moveleft():
+    print("moved left clicked")
+
+@app.route('/moveright')
+def moveright():
+    print("moved right clicked")
+
+@app.route('/moveforward')
+def moveforward():
+    print("moved forward clicked")
+
+@app.route('/movedown')
+def movedown():
+    print("moved down clicked")
+
 
 if __name__ == '__main__':
     app.run(host='10.0.0.202', threaded=True)
