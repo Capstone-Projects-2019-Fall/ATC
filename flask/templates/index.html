@@ -48,7 +48,7 @@
           <button type="button" class="btn btn-primary" id = 'record'>Record</button>
           <button type="button" class="btn btn-primary" id = 'pause'>Pause</button>
           <button type="button" class="btn btn-primary" id = 'stop'>Stop</button>
-          <button type="button" class="btn btn-primary" id = 'camera'>Camera</button>
+          <button type="button" class="btn btn-primary" id = 'takepicture'>Camera</button>
         </div>
         <div class="col-xs-1 col-sm-1 col-md-2 "></div>
         <div class="col col-sm-4 col-md-4 center_2">
@@ -115,11 +115,11 @@
               }
           });
       });
-      $("#photos").click(function () {
+      $("#takepicture").click(function () {
           $.ajax({
-              type: 'GET',
-              url: "/photos/",
+              url: "/takepicture/",
               success: function (data) {
+                alert("Picture successfully taken")
               }
           });
       });

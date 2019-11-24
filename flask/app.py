@@ -9,11 +9,12 @@ if os.environ.get('CAMERA'):
 else:
     from camera import Camera
 
+webcamera = PiCamera()
+
 # Raspberry Pi camera module (requires picamera package)
 # from camera_pi import Camera
 
 app = Flask(__name__)
-
 
 @app.route('/')
 def index():
@@ -51,9 +52,10 @@ def moveforward():
 def movedown():
     return "backwards"
 
-@app.route('/photos/')
-def photos():
-
+@app.route('/takepicture/')
+def takepicture():
+    webcamera.capture('/home/pi/Desktop/image.jpg')
+    return "success"
 
 if __name__ == '__main__':
     app.run(host='10.0.0.202', threaded=True)
