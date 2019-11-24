@@ -78,11 +78,11 @@
 		</div>
     </div>
     <script>
-      $("#left").click(function () {
+      $("#left").click(function(){
           $.ajax({
               type: 'GET',
               url: "/moveleft/",
-              success: function (data) {
+              success: function () {
                   alert("Moved left successfully")
               }
           });
@@ -91,7 +91,7 @@
           $.ajax({
               type: 'GET',
               url: "/moveright/",
-              success: function (data) {
+              success: function () {
                   alert("Moved right successfully")
               }
           });
@@ -110,7 +110,7 @@
           $.ajax({
               type: 'GET',
               url: "/movebackward/",
-              success: function (data) {
+              success: function () {
                   alert("Moved backwards successfully")
               }
           });

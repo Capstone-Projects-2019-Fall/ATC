@@ -35,21 +35,24 @@ def video_feed():
     return Response(gen(Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/moveleft')
+@app.route('/moveleft/')
 def moveleft():
-    print("moved left clicked")
+    return "left"
 
-@app.route('/moveright')
+@app.route('/moveright/')
 def moveright():
-    print("moved right clicked")
+    return "right"
 
-@app.route('/moveforward')
+@app.route('/moveforward/')
 def moveforward():
-    print("moved forward clicked")
+    return "forward"
 
-@app.route('/movedown')
+@app.route('/movebackward/')
 def movedown():
-    print("moved down clicked")
+    return "backwards"
+
+@app.route('/photos/')
+def photos():
 
 
 if __name__ == '__main__':
