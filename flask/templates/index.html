@@ -48,7 +48,7 @@
           <button type="button" class="btn btn-primary" id = 'record'>Record</button>
           <button type="button" class="btn btn-primary" id = 'pause'>Pause</button>
           <button type="button" class="btn btn-primary" id = 'stop'>Stop</button>
-          <button type="button" class="btn btn-primary" id = 'camera'>Camera</button>
+          <button type="button" class="btn btn-primary" id = 'takepicture'>Camera</button>
         </div>
         <div class="col-xs-1 col-sm-1 col-md-2 "></div>
         <div class="col col-sm-4 col-md-4 center_2">
@@ -77,6 +77,53 @@
 		</div>
 		</div>
     </div>
+    <script>
+      $("#left").click(function(){
+          $.ajax({
+              type: 'GET',
+              url: "/moveleft/",
+              success: function () {
+                  alert("Moved left successfully")
+              }
+          });
+      });
+      $("#right").click(function () {
+          $.ajax({
+              type: 'GET',
+              url: "/moveright/",
+              success: function () {
+                  alert("Moved right successfully")
+              }
+          });
+      });
+    
+      $("#forward").click(function () {
+          $.ajax({
+              type: 'GET',
+              url: "/moveforward/",
+              success: function (data) {
+                  alert("Moved forward successfully")
+              }
+          });
+      });
+      $("#backward").click(function () {
+          $.ajax({
+              type: 'GET',
+              url: "/movebackward/",
+              success: function () {
+                  alert("Moved backwards successfully")
+              }
+          });
+      });
+      $("#takepicture").click(function () {
+          $.ajax({
+              url: "/takepicture/",
+              success: function (data) {
+                alert("Picture successfully taken")
+              }
+          });
+      });
+    </script>
   </body>
 </html>
 

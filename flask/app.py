@@ -3,17 +3,11 @@ from importlib import import_module
 import os
 from flask import Flask, render_template, Response
 
-# import camera driver
-if os.environ.get('CAMERA'):
-    Camera = import_module('camera_' + os.environ['CAMERA']).Camera
-else:
-    from camera import Camera
 
 # Raspberry Pi camera module (requires picamera package)
-# from camera_pi import Camera
+from camera_pi import Camera
 
 app = Flask(__name__)
-
 
 @app.route('/')
 def index():
@@ -35,6 +29,26 @@ def video_feed():
     return Response(gen(Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+@app.route('/moveleft/')
+def moveleft():
+    return "left"
+
+@app.route('/moveright/')
+def moveright():
+    return "right"
+
+@app.route('/moveforward/')
+def moveforward():
+    return "forward"
+
+@app.route('/movebackward/')
+def movedown():
+    return "backwards"
+
+@app.route('/takepicture/')
+def takepicture():
+    Camera.capture('/home/pi/Desktop/image.jpg')
+    return "success"
 
 if __name__ == '__main__':
     app.run(host='10.0.0.202', threaded=True)
