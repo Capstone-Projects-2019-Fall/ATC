@@ -133,43 +133,6 @@
 </body>
 
 <script>
-  $("#left").click(function () {
-      $.ajax({
-          type: 'GET',
-          url: "/moveleft/",
-          success: function (data) {
-              alert("Moved left successfully")
-          }
-      });
-  });
-  $("#right").click(function () {
-      $.ajax({
-          type: 'GET',
-          url: "/moveright/",
-          success: function (data) {
-              alert("Moved right successfully")
-          }
-      });
-  });
-
-  $("#forward").click(function () {
-      $.ajax({
-          type: 'GET',
-          url: "/moveforward/",
-          success: function (data) {
-              alert("Moved forward successfully")
-          }
-      });
-  });
-  $("#backward").click(function () {
-      $.ajax({
-          type: 'GET',
-          url: "/movebackward/",
-          success: function (data) {
-              alert("Moved backwards successfully")
-          }
-      });
-  });
   $("#photos").click(function () {
       $.ajax({
           type: 'GET',
