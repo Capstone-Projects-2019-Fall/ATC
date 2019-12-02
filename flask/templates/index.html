@@ -100,7 +100,7 @@
           type: 'GET',
           url: "/moveleft/",
           success: function (data) {
-              alert("Moved left successfully")
+              //alert("Moved left successfully")
           }
       });
   });
@@ -109,7 +109,7 @@
           type: 'GET',
           url: "/moveright/",
           success: function (data) {
-              alert("Moved right successfully")
+              //alert("Moved right successfully")
           }
       });
   });
@@ -119,7 +119,7 @@
           type: 'GET',
           url: "/moveforward/",
           success: function (data) {
-              alert("Moved forward successfully")
+              //alert("Moved forward successfully")
           }
       });
   });
@@ -128,19 +128,19 @@
           type: 'GET',
           url: "/movebackward/",
           success: function (data) {
-              alert("Moved backwards successfully")
+              //alert("Moved backwards successfully")
           }
       });
 
   });
-  // $("#photos").click(function () {
-  //     $.ajax({
-  //         type: 'GET',
-  //         url: "/photos/",
-  //         success: function (data) {
-  //         }
-  //     });
-  // });
+  $("#stop").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/stop/",
+          success: function (data) {
+          }
+      });
+  });
 
 
 </script>
