@@ -50,5 +50,10 @@ def takepicture():
     Camera.capture('/home/pi/Desktop/image.jpg')
     return "success"
 
+@app.route('/photos/')
+def photos():
+    return render_template('photos.html')
+
+
 if __name__ == '__main__':
     app.run(host='10.0.0.202', threaded=True)

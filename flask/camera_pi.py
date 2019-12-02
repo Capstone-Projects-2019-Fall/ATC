@@ -9,6 +9,7 @@ class Camera(BaseCamera):
     def frames():
         with picamera.PiCamera() as camera:
             # let camera warm up
+            camera.rotation = 180
             time.sleep(2)
 
             stream = io.BytesIO()
