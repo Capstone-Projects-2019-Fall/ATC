@@ -79,7 +79,7 @@ def movedown():
             process.terminate()
             print("Process is alive status: ", process.is_alive())
         all_processes.clear()
-    t1 = multiprocessing.Process(target=send_inputs, args=(6,))
+    t1 = multiprocessing.Process(target=send_inputs, args=(7,))
     print("starting a new process")
     t1.start()
     all_processes.append(t1)      
