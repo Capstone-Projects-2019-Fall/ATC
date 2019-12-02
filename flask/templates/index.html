@@ -1,9 +1,10 @@
+
 <html lang="en">
 <head>
   <title>ATC</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
@@ -16,17 +17,26 @@
     .center_2 {
       text-align: center;
     }
+
+    .center_3 {
+      text-align: right;
+    }
+
+    .center_4 {
+      text-align: left;
+    }
+
 </style>
  
 </head>
 
 <!--start of navbar code-->
 <body>  
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark navbar-fixed-top">
   <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="photos.html" id = 'photos'>Your Photos and Videos</a></li>
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('photos_videos') }}" id = 'photos'>Your Photos and Videos</a></li>
     </ul>
   </div>
 </nav>
@@ -35,95 +45,105 @@
 <body>
     <!--below makes sure ATC Car View is always center above video-->
     <div class="row"> <!--row-->
-        <div class="col-xs-4 col-sm-4 col-md-4"></div> <!--column-->
-            <div class="col-4 col-sm-4 col-md-4  center"> <!--column-->
-                <h1>ATC Car View</h1>
-            </div>
-        </div>
-    </div>
+		<div class="col-12 center_2"> <!--column-->
+			<h2>ATC Car View</h2>
+		</div>
+	</div>
     <div class="row"> <!--Random buttons to show having elements next to the video.-->
-        <div class="col-xs-1 col-sm-1"></div>
-        <div class="col-xs-1 col-sm-1 col-md-1 center_2"></div>
-        <div class="btn-group">
-          <button type="button" class="btn btn-primary" id = 'record'>Record</button>
-          <button type="button" class="btn btn-primary" id = 'pause'>Pause</button>
-          <button type="button" class="btn btn-primary" id = 'stop'>Stop</button>
-          <button type="button" class="btn btn-primary" id = 'takepicture'>Camera</button>
-        </div>
-        <div class="col-xs-1 col-sm-1 col-md-2 "></div>
-        <div class="col col-sm-4 col-md-4 center_2">
-          <img src="{{ url_for('video_feed') }}">
-        </div>
-    </div>
-	<div class="col-1 col-sm-1 col-md-1 "></div>
-        <div class="col-3 col-sm-3 col-md-3 "> <!--column-->
-
-		<div class="row">
-		<div class="col-xs-4 col-sm-4 col-md-1"></div>
-		<div class="col-xs-1 col-sm-1 col-md-1 center_2"></div>
-			<button type="button" class="btn" id = 'forward'>Forward</button>
-
-		<div class="row">
-		<div class="col-xs-4 col-sm-4 col-md-1"></div>
-		<div class="col-xs-2 col-sm-1 col-md-4 center_2">
-		<button type="button" class="btn btn-outline-success" id = "left">Left</button></div>
-		<div class="col-xs-2 col-sm-1 col-md-4 ">
-		<button type="button" class="btn btn-outline-success" id = "right">Right</button></div></div>
-		
-		<div class="row">
-		<div class="col-xs-4 col-sm-4 col-md-4 "></div>
-		<div class="col-xs-1 col-sm-1 col-md-4 "></div>
-		<button type="button" class="btn btn-outline-warning" id = 'backward'>Backward</button>
+		<div class="col-12 col-xs-12 col-sm-12 col-md-12 center_2">
+			<div class="btn-group">
+			  <button type="button" class="btn alert-success" id = 'record'>Record</button>
+			  <button type="button" class="btn btn-warning" id = 'pause'>Pause</button>
+			  <button type="button" class="btn btn-danger" id = 'stop'>Stop</button>
+			  <button type="button" class="btn alert-success" id = 'camera'>Camera</button>
+			</div>
 		</div>
+
+		<div class="col-12 center_2">
+			<img src="stream.mjpg" width="280" height="250">
 		</div>
     </div>
-    <script>
-      $("#left").click(function(){
-          $.ajax({
-              type: 'GET',
-              url: "/moveleft/",
-              success: function () {
-                  alert("Moved left successfully")
-              }
-          });
+	<div>
+		<div class="row">
+			<div class="col-12 center_2">
+				<button type="button" class="btn alert-success" id = 'forward'>Forward</button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-6 center_3">
+				<button type="button" class="btn alert-success" id = "left">Left</button>
+			</div>
+
+			<div class="col-6 center_4">
+				<button type="button" class="btn alert-success" id = "right">Right</button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12 center_2">
+				<button type="button" class="btn alert-success" id = 'backward'>Backward</button>
+			</div>
+		</div>
+
+	</div>
+</body>
+<body>
+	<nav class="navbar fixed-bottom navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Created by the ATC Group 2019</a>
+	</nav>
+</body>
+
+<script>
+  $("#left").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/moveleft/",
+          success: function (data) {
+              alert("Moved left successfully")
+          }
       });
-      $("#right").click(function () {
-          $.ajax({
-              type: 'GET',
-              url: "/moveright/",
-              success: function () {
-                  alert("Moved right successfully")
-              }
-          });
+  });
+  $("#right").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/moveright/",
+          success: function (data) {
+              alert("Moved right successfully")
+          }
       });
-    
-      $("#forward").click(function () {
-          $.ajax({
-              type: 'GET',
-              url: "/moveforward/",
-              success: function (data) {
-                  alert("Moved forward successfully")
-              }
-          });
+  });
+
+  $("#forward").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/moveforward/",
+          success: function (data) {
+              alert("Moved forward successfully")
+          }
       });
-      $("#backward").click(function () {
-          $.ajax({
-              type: 'GET',
-              url: "/movebackward/",
-              success: function () {
-                  alert("Moved backwards successfully")
-              }
-          });
+  });
+  $("#backward").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/movebackward/",
+          success: function (data) {
+              alert("Moved backwards successfully")
+          }
       });
-      $("#photos").click(function () {
-          $.ajax({
-              url: "/photos/",
-              success: function (data) {
-                
-              }
-          });
+
+  });
+  $("#photos").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/photos/",
+          success: function (data) {
+          }
       });
-    </script>
-  </body>
+  });
+
+
+</script>
+
 </html>
 

@@ -52,7 +52,7 @@ def takepicture():
 
 @app.route('/photos/')
 def photos():
-    return render_template('photos.html')
+    return render_template('photos_videos.html')
 
 
 if __name__ == '__main__':
