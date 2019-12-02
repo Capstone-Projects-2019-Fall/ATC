@@ -52,7 +52,7 @@ def takepicture():
 
 @app.route('/photos/')
 def photos():
-    return redirect("http://10.0.0.202/photos", code=302)
+    return render_template('photos.html')
 
 
 if __name__ == '__main__':
