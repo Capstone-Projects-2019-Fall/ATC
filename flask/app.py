@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-# from importlib import import_module
-# import os
+from importlib import import_module
+import os
 from flask import Flask, render_template, Response
 
 
 # Raspberry Pi camera module (requires picamera package)
-#from camera_pi import Camera
+from camera_pi import Camera
 
 app = Flask(__name__)
 
@@ -16,9 +16,9 @@ def index():
     return render_template('index.html')
 
 
-"""
+
 def gen(camera):
-    """"""Video streaming generator function.""""""
+    """Video streaming generator function."""
     while True:
         frame = camera.get_frame()
         yield (b'--frame\r\n'
@@ -27,10 +27,9 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
-    """"""Video streaming route. Put this in the src attribute of an img tag.""""""
+    """Video streaming route. Put this in the src attribute of an img tag."""
     return Response(gen(Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
-"""
 
 
 @app.route('/moveleft/')
