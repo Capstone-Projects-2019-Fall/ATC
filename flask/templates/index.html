@@ -148,15 +148,15 @@
 		  }
 	  });
 	});
-  
-  $("#stop").click(function () {
-      $.ajax({
-          type: 'GET',
-          url: "/stop/",
-          success: function (data) {
-          }
-      });
-  });
+
+	$("#stop").click(function () {
+	  $.ajax({
+		  type: 'GET',
+		  url: "/stop/",
+		  success: function (data) {
+		  }
+	  });
+	});
 
 	jQuery("#my_styles .btn").click(function(){
 		jQuery(this).toggleClass('focus');
