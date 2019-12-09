@@ -4,12 +4,12 @@ import os
 from flask import Flask, render_template, Response
 import multiprocessing
 from time import sleep
-import serial
-ser = serial.Serial('/dev/ttyACM0', 9600)
-all_processes = []
+# import serial
+# ser = serial.Serial('/dev/ttyACM0', 9600)
+# all_processes = []
 
 # Raspberry Pi camera module (requires picamera package)
-from camera_pi import Camera
+#from camera_pi import Camera
 
 app = Flask(__name__)
 
@@ -102,6 +102,10 @@ def takepicture():
     Camera.capture('/home/pi/Desktop/image.jpg')
     return "success"
 
+@app.route('/autopilot/')
+def autopilot():
+    return "success"
+
 @app.route('/photos/')
 def photos():
     return render_template('photos.html')
@@ -126,4 +130,4 @@ def send_inputs(number):
 
 
 if __name__ == '__main__':
-    app.run(host='172.20.10.2', threaded=True)
+    app.run(host='127.0.0.1', threaded=True)

@@ -172,6 +172,16 @@
 	jQuery("#autoPilot_isOn .btn").click(function(){
 		jQuery(this).toggleClass('focus');
 	});
+
+	$("#autoPilot").click(function () {
+	  $.ajax({
+		  url: "/autopilot/",
+		  success: function () {
+			  alert("Auto Pilot Enabled")
+		  }
+	  });
+	});
+
 </script>
 
 
