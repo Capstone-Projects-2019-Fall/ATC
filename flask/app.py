@@ -40,7 +40,7 @@ def moveleft():
             process.terminate()
             print("Process is alive status: ", process.is_alive())
         all_processes.clear()
-    t1 = multiprocessing.Process(target=send_inputs, args=(4,))
+    t1 = multiprocessing.Process(target=send_inputs, args=(5,))
     print("starting a new process")
     t1.start()
     all_processes.append(t1)     
@@ -53,7 +53,7 @@ def moveright():
             process.terminate()
             print("Process is alive status: ", process.is_alive())
         all_processes.clear()
-    t1 = multiprocessing.Process(target=send_inputs, args=(5,))
+    t1 = multiprocessing.Process(target=send_inputs, args=(4,))
     print("starting a new process")
     t1.start()
     all_processes.append(t1)    
@@ -126,4 +126,4 @@ def send_inputs(number):
 
 
 if __name__ == '__main__':
-    app.run(host='172.20.10.2', threaded=True)
+    app.run(host='172.20.10.3', threaded=True)
