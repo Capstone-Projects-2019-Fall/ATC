@@ -99,7 +99,7 @@ def stop():
 
 @app.route('/takepicture/')
 def takepicture():
-    Camera.capture('/home/pi/Desktop/image.jpg')
+    # Camera.capture('/home/pi/Desktop/image.jpg')
     return "success"
 
 @app.route('/autopilot/')

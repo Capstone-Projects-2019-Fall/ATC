@@ -181,6 +181,15 @@
 		  }
 	  });
 	});
+	$("#camera").click(function () {
+	  $.ajax({
+		  type: 'GET',
+		  url: "/takepicture/",
+		  success: function (data) {
+			  alert("A photo has been taken")
+		  }
+	  });
+	});
 
 </script>
 
