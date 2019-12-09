@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 <style>
@@ -26,6 +26,13 @@
       text-align: left;
     }
 
+	.focus{
+	 background-color:red;
+    }
+
+	button#autoPilot:focus{
+		 background:red;
+	}
 </style>
  
 </head>
@@ -36,7 +43,7 @@
   <div class="container-fluid">
     <ul class="navbar-nav">
       <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-      <li class="nav-item"><a class="nav-link" href="{{ url_for('photos') }}" id = 'photos'>Your Photos and Videos</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('photos') }}" id ="photos">Your Photos and Videos</a></li>
     </ul>
   </div>
 </nav>
@@ -51,11 +58,12 @@
 	</div>
     <div class="row"> <!--Random buttons to show having elements next to the video.-->
 		<div class="col-12 col-xs-12 col-sm-12 col-md-12 center_2">
-			<div class="btn-group">
-			  <button type="button" class="btn alert-success" id = 'record'>Record</button>
-			  <button type="button" class="btn btn-warning" id = 'pause'>Pause</button>
-			  <button type="button" class="btn btn-danger" id = 'stop'>Stop</button>
-			  <button type="button" class="btn alert-success" id = 'camera'>Camera</button>
+			<div class="btn" id="autoPilot_isOn">
+				<button type="button" class="btn alert-success" id="autoPilot">Auto Pilot</button>
+
+			</div>
+			<div class="btn">
+				<button type="button" class="btn alert-success" id ="camera">Take Picture</button>
 			</div>
 		</div>
 
@@ -64,25 +72,36 @@
 		</div>
     </div>
 	<div>
+		<!--Forward Button-->
 		<div class="row">
 			<div class="col-12 center_2">
-				<button type="button" class="btn alert-success" id = 'forward'>Forward</button>
+				<button type="button" class="btn alert-success" id ="forward">Forward</button>
 			</div>
 		</div>
 
+		<!--Left Button-->
 		<div class="row">
 			<div class="col-6 center_3">
-				<button type="button" class="btn alert-success" id = "left">Left</button>
+				<button type="button" class="btn alert-success" id ="left">Left</button>
 			</div>
 
+			<!--Right Button-->
 			<div class="col-6 center_4">
-				<button type="button" class="btn alert-success" id = "right">Right</button>
+				<button type="button" class="btn alert-success" id ="right">Right</button>
 			</div>
 		</div>
 
+		<!--Backward Button-->
 		<div class="row">
 			<div class="col-12 center_2">
-				<button type="button" class="btn alert-success" id = 'backward'>Backward</button>
+				<button type="button" class="btn alert-success" id ="backward">Backward</button>
+			</div>
+		</div>
+
+		<!--Stop Button-->
+		<div class="row">
+			<div class="col-12 center_2">
+				<button type="button" class="btn alert-danger" id ="stop">Stop</button>
 			</div>
 		</div>
 
@@ -95,55 +114,76 @@
 </body>
 
 <script>
-  $("#left").click(function () {
-      $.ajax({
-          type: 'GET',
-          url: "/moveleft/",
-          success: function (data) {
-              //alert("Moved left successfully")
-          }
-      });
-  });
-  $("#right").click(function () {
-      $.ajax({
-          type: 'GET',
-          url: "/moveright/",
-          success: function (data) {
-              //alert("Moved right successfully")
-          }
-      });
-  });
+	$("#left").click(function () {
+	  $.ajax({
+		  type: 'GET',
+		  url: "/moveleft/",
+		  success: function (data) {
+			  alert("Moved left successfully")
+		  }
+	  });
+	});
+	$("#right").click(function () {
+	  $.ajax({
+		  type: 'GET',
+		  url: "/moveright/",
+		  success: function (data) {
+			  alert("Moved right successfully")
+		  }
+	  });
+	});
 
-  $("#forward").click(function () {
-      $.ajax({
-          type: 'GET',
-          url: "/moveforward/",
-          success: function (data) {
-              //alert("Moved forward successfully")
-          }
-      });
-  });
-  $("#backward").click(function () {
-      $.ajax({
-          type: 'GET',
-          url: "/movebackward/",
-          success: function (data) {
-              //alert("Moved backwards successfully")
-          }
-      });
+	$("#forward").click(function () {
+	  $.ajax({
+		  type: 'GET',
+		  url: "/moveforward/",
+		  success: function (data) {
+			  alert("Moved forward successfully")
+		  }
+	  });
+	});
+	$("#backward").click(function () {
+	  $.ajax({
+		  type: 'GET',
+		  url: "/movebackward/",
+		  success: function (data) {
+			  alert("Moved backwards successfully")
+		  }
+	  });
+	});
+	$("#photos").click(function () {
+	  $.ajax({
+		  type: 'GET',
+		  url: "/photos_videos/",
+		  success: function (data) {
+		  }
+	  });
+	});
 
-  });
-  $("#stop").click(function () {
-      $.ajax({
-          type: 'GET',
-          url: "/stop/",
-          success: function (data) {
-          }
-      });
-  });
+	$("#stop").click(function () {
+	  $.ajax({
+		  type: 'GET',
+		  url: "/stop/",
+		  success: function (data) {
+		  }
+	  });
+	});
 
+	jQuery("#autoPilot_isOn .btn").click(function(){
+		jQuery(this).toggleClass('focus');
+	});
+
+	$("#autoPilot").click(function () {
+	  $.ajax({
+		  url: "/autopilot/",
+		  success: function () {
+			  alert("Auto Pilot Enabled")
+		  }
+	  });
+	});
 
 </script>
+
 
 </html>
 
