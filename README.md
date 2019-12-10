@@ -8,8 +8,14 @@ Autonomous-Tracking-Car
 4) ATC can do a simple follow me going fowards to follow the user as the user gets further away from the car.
 
 ## Bugs 
-1) The follow me feature is not completely matured. It can only follow the users if they are in frame and are only moving away or closer to the vehichle, the vehicle cannot turn with the follow me feature.
-2) The frames per second and live stream is off by an average of a  second from real time (may vary due to internet connection) 
+Known bug 1: 
+Images in the server are not displayed to the web app. There is an issue with loading the images from the server when trying to display them to the web app photos page.
+
+Known bug 2: 
+The follow me feature is not completely matured. It can only follow the users if they are in frame and are only moving away or closer to the vehicle, the vehicle cannot turn with the follow me feature.
+
+Known bug 3: 
+The frames per second and live stream is off by an average of a second from real time (may vary due to internet connection).
 
 ## How to run ATC 
 This you will need:
