@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+  <title>ATC</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<style>
+    .center {
+      margin-top: 100px;
+      text-align: center;
+    }
+	
+    .center_2 {
+      text-align: center;
+    }
+    .center_3 {
+      text-align: right;
+    }
+    .center_4 {
+      text-align: left;
+    }
+</style>
+ 
+</head>
+
+<!--start of navbar code-->
+<body>  
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark navbar-fixed-top">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="photos.html" id = 'photos'>Your Photos and Videos</a></li>
+    </ul>
+  </div>
+</nav>
+</body>
+
+<body>
+    <!--below makes sure ATC Car View is always center above video-->
+    <div class="row"> <!--row-->
+		<div class="col-12 center_2"> <!--column-->
+			<h2>ATC Car View</h2>
+		</div>
+	</div>
+    <div class="row"> <!--Random buttons to show having elements next to the video.-->
+		<div class="col-12 col-xs-12 col-sm-12 col-md-12 center_2">
+			<div class="btn-group">
+			  <button type="button" class="btn alert-success" id = 'record'>Follow-Me</button>
+			  <button type="button" class="btn btn-danger" id = 'stop'>Stop</button>
+			  <button type="button" class="btn alert-success" id = 'camera'>Camera</button>
+			</div>
+		</div>
+
+
+
+
+</script>
+
+</html>
